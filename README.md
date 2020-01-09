@@ -1,3 +1,19 @@
+# Sorting Visualizer
+This is a simple project to create a visualizer for different sorting algorithms (bubble sort, merge sort, etc.) using `React` and `TypeScript` (targeting ES6).
+
+## Front-end
+* `react-bootstrap` is used for various front-end components.
+* `react-slider` is used for the numeric slider.
+
+## Testing
+
+No tests have been written in this project.
+
+## Screenshots
+![[Imgur] Screenshot of the app - running merge-sort visualization](https://i.imgur.com/ngXUpYf.png)
+
+## Create React App
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
