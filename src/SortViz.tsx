@@ -35,7 +35,7 @@ class SortViz extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      nElements: 50,
+      nElements: (1 << 6),
       beingAccessed: new Set<number>(),
       beingCompared: new Set<number>(),
       beingSwapped: new Set<number>(),
@@ -266,51 +266,44 @@ class SortViz extends React.Component<IProps, IState> {
     let max_val = Math.max(...data);
 
     return (
-      <Container className="sort-viz" fluid={true}>
-        <Container className="control-area" id="control-area" fluid={true}>
-          <Row>
-            <Col>
-              <Navbar.Text>Sorting Algorithm</Navbar.Text>
-            </Col>
-            <Col>
-              <Navbar.Text>Number of elements</Navbar.Text>
-            </Col>
-            <Col>
-              <Navbar.Text>Control buttons</Navbar.Text>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <DropdownButton id="dropdown-sort-algo" title={this.sorterFactory.getSorterName(this.state.sortAlgo).algo} disabled={this.state.isSorting}>
-                <Dropdown.Item key={Sorters.BUBBLE_SORTER} eventKey={Sorters.BUBBLE_SORTER.toString()} id="dropdown-item-bubblesort" onSelect={this.handleDropdownSortAlgoSelect}>Bubble Sort</Dropdown.Item>
-                <Dropdown.Item key={Sorters.INSERTION_SORTER} eventKey={Sorters.INSERTION_SORTER.toString()} id="dropdown-item-insertionsort" onSelect={this.handleDropdownSortAlgoSelect}>Insertion Sort</Dropdown.Item>
-                <Dropdown.Item key={Sorters.MERGE_SORTER} eventKey={Sorters.MERGE_SORTER.toString()} id="dropdown-item-mergesort" onSelect={this.handleDropdownSortAlgoSelect}>Merge Sort</Dropdown.Item>
-              </DropdownButton>
-            </Col>
-            <Col>
-              <ReactSlider
-                className="slider-num-elements"
-                thumbClassName="slider-num-elements-thumb"
-                trackClassName="slider-num-elements-track"
-                value={this.state.nElements}
-                min={1}
-                max={128}
-                onAfterChange={this.handleSliderNumElements}
-                renderThumb={this.handleSliderNumElementsRenderThumb}
-                disabled={this.state.isSorting}
-              />
-            </Col>
-            <Col>
-              <Button className="mr-1" onClick={this.handleButtonGenerate} disabled={this.state.isSorting}>Generate</Button>
-              <Button className="ml-1" onClick={this.handleButtonSort} disabled={this.state.isSorting}>Sort!</Button>
-            </Col>
-          </Row>
+      <Container id="sort-viz" className="sort-viz" fluid={true}>
+        <Container id="control-area" className="control-area" fluid={true}>
+          <Container className="flex-column">
+            <p>Sorting Algorithm</p>
+            <DropdownButton
+              id="dropdown-sort-algo" title={this.sorterFactory.getSorterName(this.state.sortAlgo).algo} variant={this.state.sortAlgo === Sorters.BASE ? "danger" : "info"} disabled={this.state.isSorting}>
+              <Dropdown.Item key={Sorters.BUBBLE_SORTER} eventKey={Sorters.BUBBLE_SORTER.toString()} id="dropdown-item-bubblesort" onSelect={this.handleDropdownSortAlgoSelect}>Bubble Sort</Dropdown.Item>
+              <Dropdown.Item key={Sorters.INSERTION_SORTER} eventKey={Sorters.INSERTION_SORTER.toString()} id="dropdown-item-insertionsort" onSelect={this.handleDropdownSortAlgoSelect}>Insertion Sort</Dropdown.Item>
+              <Dropdown.Item key={Sorters.MERGE_SORTER} eventKey={Sorters.MERGE_SORTER.toString()} id="dropdown-item-mergesort" onSelect={this.handleDropdownSortAlgoSelect}>Merge Sort</Dropdown.Item>
+            </DropdownButton>
+          </Container>
+          <Container className="flex-column">
+            <p>Number of elements</p>
+            <ReactSlider
+              className="slider-num-elements"
+              thumbClassName="slider-num-elements-thumb"
+              trackClassName="slider-num-elements-track"
+              value={this.state.nElements}
+              min={1}
+              max={128}
+              onAfterChange={this.handleSliderNumElements}
+              renderThumb={this.handleSliderNumElementsRenderThumb}
+              disabled={this.state.isSorting}
+            />
+          </Container>
+          <Container className="flex-column">
+            <p>Operation</p>
+            <Container className="d-flex justify-content-around">
+              <Button onClick={this.handleButtonGenerate} disabled={this.state.isSorting || this.state.nElements < 2}>Generate</Button>
+              <Button onClick={this.handleButtonSort} variant="success" disabled={this.state.isSorting || this.state.sortAlgo === Sorters.BASE || this.state.nElements < 2}>Sort</Button>
+            </Container>
+          </Container>
         </Container>
-        <Container className="visualization-area" id="visualization-area" fluid={true}> {
+        <Container id="visualization-area" className="visualization-area" fluid={true}> {
           data.map((val, idx) => (
             <ArrayElement
               key={idx}
-              width={`${100 / this.state.nElements}%`}
+              width={`${100 / data.length}%`}
               height={`${(val * 100 / max_val).toFixed()}%`}
               beingAccessed={this.state.beingAccessed.has(idx)}
               beingCompared={this.state.beingCompared.has(idx)}

@@ -1,0 +1,25 @@
+.array-element {
+  display: inline-block;
+  border-left: 0.5px white solid;
+  border-right: 0.5px white solid;
+}
+
+.array-element {
+  background: black;
+}
+
+.array-element.done {
+  background:darkgreen;
+}
+
+.array-element.being-swapped {
+  background: darkblue;
+}
+
+.array-element.being-compared {
+  background: goldenrod;
+}
+
+.array-element.being-accessed {
+  background: darkred;
+}

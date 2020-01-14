@@ -1,5 +1,4 @@
-import { getRandomIntInclusive } from "../helper";
-import { notDeepEqual } from "assert";
+import * as Helper from "../helper"
 
 export interface IArrayElementInfo {
   index: number;
@@ -35,7 +34,7 @@ export default class Sorter {
     n = Math.round(n);
     if (n > 0) {
       this.data = Array();
-      for (let i = 0; i < n; ++i) this.data.push(getRandomIntInclusive(minVal, maxVal));
+      for (let i = 0; i < n; ++i) this.data.push(Helper.getRandomIntInclusive(minVal, maxVal));
       this.sorted = false;
     };
     return this;

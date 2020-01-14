@@ -1,9 +1,14 @@
+// pre-generated
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import * as serviceWorker from './serviceWorker';
 
+// bootstrap
 import "bootstrap/dist/css/bootstrap.min.css"
+
+// local styles
+import "./index.css"
+import "./array-element.css"
 
 import SortViz from './SortViz'
 

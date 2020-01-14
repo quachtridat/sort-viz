@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,45 +26,30 @@ html, body, #root {
 }
 
 .sort-viz {
+  display: block;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .control-area {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  align-items: stretch;
   text-align: center;
-  padding-bottom: 5%;
+  padding: 1%;
   max-height: 10%;
 }
 
 .visualization-area {
-  height: 90%;
-}
-
-.array-element {
-  display: inline-block;
-  border-left: 0.5px white solid;
-  border-right: 0.5px white solid;
-  box-sizing: border-box;
-}
-
-.array-element {
-  background: black;
-}
-
-.array-element.done {
-  background:darkgreen;
-}
-
-.array-element.being-swapped {
-  background: darkblue;
-}
-
-.array-element.being-compared {
-  background: goldenrod;
-}
-
-.array-element.being-accessed {
-  background: darkred;
+  display: block;
+  position: absolute;
+  top: 15%;
+  bottom: 0%;
+  left: 0;
+  right: 0;
 }
 
 #dropdown-sort-algo {
@@ -64,28 +57,25 @@ html, body, #root {
 }
 
 .slider-num-elements {
+  display: inline-flex;
   width: 100%;
-  height: 25px;
+  height: 1px;
+  align-items: center;
 }
 
 .slider-num-elements-track {
   top: 0;
   bottom: 0;
   background: gray;
-  border-radius: 999px;
 }
 
 .slider-num-elements-thumb {
-  height: 25px;
-  line-height: 25px;
-  width: 25px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2em;
+  width: 2em;
   background-color: #000;
   color: #fff;
-  border-radius: 50%;
   cursor: grab;
-}
-
-#nav-sortviz-control {
-  justify-content: space-between;
 }
