@@ -1,4 +1,5 @@
-import Sorter, {IArrayElementInfo, ESortOpStages, ESortOps, TSortFnGenerator, TSortFnYield} from './Sorter'
+import Sorter, {IArrayElementInfo, ESortOpStages, ESortOps, TSortFnGenerator, TSortFnYield} from './Sorter';
+import { range } from '@/lib/helper';
 
 export default class MergeSorter extends Sorter {
   protected *merge(part1: {startIdx: number, endIdx: number}, part2: {startIdx: number, endIdx: number}): Generator<TSortFnYield, IArrayElementInfo[]> {
@@ -7,7 +8,7 @@ export default class MergeSorter extends Sorter {
     let idx1: number = part1.startIdx;
     let idx2: number = part2.startIdx;
     
-    for (; idx1 <= part1.endIdx && idx2 <= part2.endIdx;) {
+    while (idx1 <= part1.endIdx && idx2 <= part2.endIdx) {
       let elem1: IArrayElementInfo = {index: idx1};
       let elem2: IArrayElementInfo = {index: idx2};
 
@@ -26,9 +27,9 @@ export default class MergeSorter extends Sorter {
       } else {
         yield this.makeSortFnYield(ESortOpStages.IN, ESortOps.COMPARE, [elem1, elem2]);
         arr.push({index: idx2++, value: data2});
-      };
+      }
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.COMPARE, [elem1, elem2]);
-    };
+    }
     
     while (idx1 <= part1.endIdx) {
       let elem1: IArrayElementInfo = {index: idx1};
@@ -38,7 +39,7 @@ export default class MergeSorter extends Sorter {
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.ACCESS, [elem1]);
 
       arr.push({index: idx1++, value: data1});
-    };
+    }
 
     while (idx2 <= part2.endIdx) {
       let elem2: IArrayElementInfo = {index: idx2};
@@ -48,10 +49,10 @@ export default class MergeSorter extends Sorter {
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.ACCESS, [elem2]);
 
       arr.push({index: idx2++, value: data2});
-    };
+    }
 
     return arr;
-  };
+  }
 
   protected *mergeSort(startIdx: number, endIdx: number): TSortFnGenerator {
     yield this.makeSortFnYield(ESortOpStages.IN, ESortOps.SORT);
@@ -85,16 +86,16 @@ export default class MergeSorter extends Sorter {
         this.data[startIdx + idx] = val.value; yield this.makeSortFnYield(ESortOpStages.IN, ESortOps.ACCESS, [elem]);
         yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.ACCESS, [elem]);
       } else console.error("This should not happen D:");
-    };
+    }
 
-    yield this.makeSortFnYield(ESortOpStages.NONE, ESortOps.DONE, [...Array(endIdx - startIdx + 1).keys()].map(val => {
+    yield this.makeSortFnYield(ESortOpStages.NONE, ESortOps.DONE, [...range(startIdx, endIdx, 1, false)].map(idx => {
       return {
-        index: val + startIdx
-      };
+        index: idx,
+      }
     }));
 
     return;
-  };
+  }
 
   public *sort(): TSortFnGenerator {
     yield this.makeSortFnYield(ESortOpStages.PRE, ESortOps.SORT);
@@ -102,11 +103,11 @@ export default class MergeSorter extends Sorter {
     if (this.data.length < 1) {
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
       return;
-    };
+    }
 
     yield *this.mergeSort(0, this.data.length - 1);
 
     yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
     return;
-  };
-};
+  }
+}

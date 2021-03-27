@@ -1,33 +1,36 @@
 {
   "name": "sort-viz",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.22",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-slider": "^1.0.0",
-    "bootstrap": "^4.4.1",
-    "react": "^16.12.0",
-    "react-bootstrap": "^1.0.0-beta.16",
-    "react-delay": "^0.1.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
-    "react-slider": "^1.0.1",
-    "typescript": "^3.7.4"
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/user-event": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "latest",
+    "@types/react-slider": "latest",
+    "bootstrap": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-bootstrap": "latest",
+    "react-delay": "latest",
+    "react-dom": "latest",
+    "react-slider": "latest",
+    "typescript": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "debug": "Set-ExecutionPolicy Unrestricted -Scope CurrentUser; $env:NODE_OPTIONS='--inspect'; next dev",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "test": "jest",
+    "test-all": "npm run-script lint; npm run-script type-check; npm run-script test",
+    "export": "next export"
   },
   "browserslist": {
     "production": [
