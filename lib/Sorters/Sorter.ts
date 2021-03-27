@@ -1,9 +1,9 @@
-import * as Helper from "../helper"
+import * as Helper from '@/lib/helper'
 
 export interface IArrayElementInfo {
   index: number;
   value?: number;
-};
+}
 
 export enum ESortOps { NONE, ACCESS, COMPARE, SWAP, SORT, DONE, };
 
@@ -15,7 +15,7 @@ export interface ISorterEvent {
     op: ESortOps
   };
   elems: IArrayElementInfo[];
-};
+}
 
 export type TSortFnYield = ISorterEvent;
 export type TSortFnRet = void;
@@ -26,9 +26,9 @@ export default class Sorter {
   protected data: number[] = [];
   protected sorted: boolean = false;
 
-  public n_elements: (() => number) = () => {
+  public n_elements(): number {
     return this.data.length;
-  };
+  }
 
   public generate(n: number, minVal: number = 1, maxVal: number = 100): Sorter {
     n = Math.round(n);
@@ -36,23 +36,23 @@ export default class Sorter {
       this.data = Array();
       for (let i = 0; i < n; ++i) this.data.push(Helper.getRandomIntInclusive(minVal, maxVal));
       this.sorted = false;
-    };
+    }
     return this;
-  };
+  }
 
   public populate(arr: number[], isSorted: boolean = false): Sorter {
     this.data = arr;
     this.sorted = isSorted;
     return this;
-  };
+  }
 
   public get_data() {
     return this.data;
-  };
+  }
 
   public values() {
     return this.data.values;
-  };
+  }
 
   protected makeSortFnYield(stage: ESortOpStages = ESortOpStages.NONE, op: ESortOps = ESortOps.NONE, elems: IArrayElementInfo[] = []): TSortFnYield {
     return {
@@ -62,10 +62,17 @@ export default class Sorter {
       },
       elems: elems,
     };
-  };
+  }
 
   public *sort(): TSortFnGenerator {
     // NOT IMPLEMENTED
+    yield {
+      elems: [],
+      event_type: {
+        op: ESortOps.NONE,
+        stage: ESortOpStages.NONE
+      }
+    };
     return;
-  };
-};
+  }
+}

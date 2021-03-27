@@ -26,30 +26,30 @@ html, body, #root {
 }
 
 .sort-viz {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .control-area {
   display: flex;
   flex-direction: row;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
   justify-content: space-between;
   align-items: stretch;
   text-align: center;
   padding: 1%;
-  max-height: 10%;
+  height: 10%;
 }
 
 .visualization-area {
-  display: block;
-  position: absolute;
-  top: 15%;
-  bottom: 0%;
-  left: 0;
-  right: 0;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 90%;
+  align-items: flex-end;
 }
 
 #dropdown-sort-algo {
