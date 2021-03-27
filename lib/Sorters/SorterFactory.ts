@@ -8,7 +8,7 @@ export enum Sorters {
   BUBBLE_SORTER,
   INSERTION_SORTER,
   MERGE_SORTER
-};
+}
 
 export type TSorterInfo = {
   name: string,
@@ -26,8 +26,8 @@ export default class SorterFactory {
         return new MergeSorter();
       default:
         return new Sorter();
-    };
-  };
+    }
+  }
   public getSorterName(sorter?: Sorters): TSorterInfo {
     switch (sorter) {
       case Sorters.BUBBLE_SORTER:
@@ -50,6 +50,6 @@ export default class SorterFactory {
           name: "None",
           algo: "None",
         };
-    };
-  };
-};
+    }
+  }
+}

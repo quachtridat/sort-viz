@@ -5,9 +5,9 @@ export interface IArrayElementInfo {
   value?: number;
 }
 
-export enum ESortOps { NONE, ACCESS, COMPARE, SWAP, SORT, DONE, };
+export enum ESortOps { NONE, ACCESS, COMPARE, SWAP, SORT, DONE, }
 
-export enum ESortOpStages { NONE, PRE, IN, POST };
+export enum ESortOpStages { NONE, PRE, IN, POST }
 
 export interface ISorterEvent {
   event_type: {

@@ -7,7 +7,7 @@ export default class BubbleSorter extends Sorter {
     if (this.data.length < 1) {
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
       return;
-    };
+    }
 
     for (let iteration = 0, n = this.data.length; iteration < n; ++iteration) {
       for (let i = 1; i + iteration < n; ++i) {
@@ -33,12 +33,12 @@ export default class BubbleSorter extends Sorter {
           yield this.makeSortFnYield(ESortOpStages.PRE, ESortOps.SWAP, [element1, element2]);
           [this.data[idx1], this.data[idx2]] = [this.data[idx2], this.data[idx1]]; yield this.makeSortFnYield(ESortOpStages.IN, ESortOps.SWAP, [element1, element2]);
           yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SWAP, [element1, element2]);
-        };
-      };
+        }
+      }
       yield this.makeSortFnYield(ESortOpStages.NONE, ESortOps.DONE, [{index: n - iteration - 1}]);
-    };
+    }
     this.sorted = true;
     yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
     return;
-  };
-};
+  }
+}

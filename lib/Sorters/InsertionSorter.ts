@@ -7,7 +7,7 @@ export default class InsertionSorter extends Sorter {
     if (this.data.length < 1) {
       yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
       return;
-    };
+    }
 
     // In insertion sort, the first element is initially considered good (in its correct position)
     yield this.makeSortFnYield(ESortOpStages.NONE, ESortOps.DONE, [{index: 0}]);
@@ -50,11 +50,11 @@ export default class InsertionSorter extends Sorter {
 
           yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SWAP, [elem1, elem2]);
         } else break;
-      };
+      }
       yield this.makeSortFnYield(ESortOpStages.NONE, ESortOps.DONE, [{index: i}]);
-    };
+    }
 
     this.sorted = true;
     yield this.makeSortFnYield(ESortOpStages.POST, ESortOps.SORT);
-  };
-};
+  }
+}
